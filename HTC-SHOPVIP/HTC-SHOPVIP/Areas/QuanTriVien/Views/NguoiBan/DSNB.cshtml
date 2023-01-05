@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewBag.Title = "DSNB";
+    Layout = "~/Areas/QuanTriVien/Views/Shared/_LayoutPage1.cshtml";
+}
+
+
+
+
+
+
+
+<!-- div.table-responsive -->
+<!-- div.dataTables_borderWrap -->
+
+@using HTC_SHOPVIP.Models
+
+
+
+
+
+
+<div class="row">
+    <div class="col-xs-12">
+
+
+        <div class="clearfix">
+            <div class="pull-right tableTools-container"></div>
+        </div>
+        <div class="table-header">
+            Danh sách Người Bán Hàng
+        </div>
+
+        <!-- div.table-responsive -->
+        <!-- div.dataTables_borderWrap -->
+        <div>
+            <table id="dynamic-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">
+                            <label class="pos-rel">
+                                <input type="checkbox" class="ace" />
+                                <span class="lbl"></span>
+                            </label>
+                        </th>
+                        <th>Mã Người bán</th>
+                        <th>Họ tên</th>
+                        <th>Số điện thoại</th>
+                        <th class="hidden-480">Địa chỉ</th>
+
+                        <th>
+                            <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+                            Tài khoản sử dụng
+                        </th>
+
+
+                        <th>Chỉnh sửa</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @using (var con = new Model1())
+                    {
+                        var list = (from s in con.NguoiBans
+
+                                   select s).ToList();
+
+                    foreach (var item in list)
+                    {
+                            <tr>
+                                <td class="center">
+                                    <label class="pos-rel">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl"></span>
+                                    </label>
+                                </td>
+
+                                <td>
+                                    @item.MaNguoiBan
+                                </td>
+                                <td>@item.HoTen</td>
+
+                                <td class="hidden-480">@item.SDT</td>
+                                <td>@item.DiaChi</td>
+
+                                <td class="hidden-480">
+                                    <span class="">@item.taikhoan</span>
+                                </td>
+
+                                <td>
+                                    <div class="hidden-sm hidden-xs action-buttons">
+
+
+
+                                        <a class="red" href="~/QuanTriVien/NguoiMua/XoaKH?id=@item.MaNguoiBan">
+                                            <span class="label label-danger label-white middle">  Xóa  </span>
+                                        </a>
+                                    </div>
+
+
+                                </td>
+                            </tr>
+
+                        }
+                    }
+
+
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

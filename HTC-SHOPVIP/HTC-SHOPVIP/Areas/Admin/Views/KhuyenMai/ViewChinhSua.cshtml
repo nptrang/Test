@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "ViewChinhSua";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    int id = ViewBag.id;
+}
+
+
+
+@using HTC_SHOPVIP.Models
+@model HTC_SHOPVIP.Models.Sanpham
+
+
+@using (var con = new Model1())
+{
+    var km = (from s in con.khuyenmais
+              where s.MaKM == id
+              select s).FirstOrDefault();
+
+<div class="container">
+    <div class="row">
+        <div class="tile">
+            <h3 class="tile-title">Thêm mới khuyến mãi</h3>
+
+            <form class="row" action="/Admin/KhuyenMai/CapNhat" method="get">
+                <div class="form-group col-md-3">
+                    <label class="control-label">Mã khuyến mãi</label>
+                    <input name="id" class="form-control" type="text" value="@km.MaKM">
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Ngày bắt đầu</label>
+                    <input name="ngaybatdau" class="form-control" type="date" value="@km.Ngaybatdau">
+                </div>
+
+
+                <div class="form-group  col-md-3">
+                    <label class="control-label">Ngày kết thúc</label>
+                    <input name="ngayketthuc" class="form-control" type="date" @km.Ngayketthuc>
+                </div>
+
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Phần trăm giảm giá</label>
+                    <input name="phantramgg" class="form-control" type="text" value="@km.phantramgiam">
+                </div>
+
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Mô tả</label>
+                    <input name="mota" class="form-control" type="text" value="@km.MoTa">
+                </div>
+
+
+                <div class="col-lg-12">
+                    <button class="user-btn-save" type="submit">Lưu lại</button>
+                    <a class="user-btn-close pull-right" href="~/Admin/KhuyenMai/Index">Hủy bỏ</a>
+                </div>
+
+            </form>
+
+        </div>
+
+
+    </div>
+</div>
+}

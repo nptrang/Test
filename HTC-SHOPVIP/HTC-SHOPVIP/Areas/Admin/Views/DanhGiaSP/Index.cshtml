@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using HTC_SHOPVIP.Models
+
+
+
+
+
+
+
+
+<div class="row">
+    <div class="col-xs-12">
+
+
+      
+        <div class="table-header">
+            Phàn hổi khách hàng
+        </div>
+
+
+        <div>
+            <table id="dynamic-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">
+                            <label class="pos-rel">
+                                <input type="checkbox" class="ace" />
+                                <span class="lbl"></span>
+                            </label>
+                        </th>
+                        <th>Mã đánh giá</th>
+                        <th>Mã sản phẩm</th>
+
+                        <th class="hidden-480">nội dung</th>
+
+                        <th>
+                            <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+                           ngày đánh giá
+                        </th>
+                        <th>Mã khách hàng</th>
+
+                        <th>Đánh giá số sao</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @using (var con = new Model1())
+                    {
+                        var list = (from s in con.SP_Danhgia
+                                    select s).ToList();
+
+
+
+
+                        foreach (var item in list)
+                        {
+                            @*<a href="~/Admin/DonHang/CapNhat?id=@item.MaDon" class="pull-right">Duyệt đơn hàng</a>*@
+
+
+                            <tr>
+                                <td class="center">
+                                    <label class="pos-rel">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl"></span>
+                                    </label>
+                                </td>
+
+                                <td>
+                                    @item.Madanhgia_sp
+                                </td>
+                                <td>@item.MaSP</td>
+
+                                <td class="hidden-480">@item.noidung_danhgia</td>
+                                <td>@item.NgayDanhgia</td>
+
+                                <td class="hidden-480">
+                                    <span class="admin-status">@item.MaKH</span>
+                                </td>
+
+                                <td>
+                                    <div class="hidden-sm hidden-xs action-buttons">
+
+                                    @item.Sao
+
+                                    </div>
+
+
+                                </td>
+
+                            </tr>
+
+                            <!-- Modal -->
+
+                        }
+
+                    }
+
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+    </div>
+</div>

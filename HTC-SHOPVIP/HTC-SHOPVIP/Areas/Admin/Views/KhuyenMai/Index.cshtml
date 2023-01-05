@@ -1,0 +1,125 @@
+﻿@using HTC_SHOPVIP.Models
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+
+
+
+
+<div class="row">
+    <div class="col-xs-12">
+
+
+        <div class="clearfix">
+            <div class="pull-left">
+                    <button type="button" class="btn btn-sm btn-primary" onclick="ThemMoiKM()">Thêm mới khuyến mãi</button>
+                    <script>
+                        function ThemMoiKM() {
+                            location.replace("/Admin/KhuyenMai/ThemKM");
+                        }
+                    </script>
+                </div>
+            <div class="pull-right tableTools-container"></div>
+        </div>
+        <div class="table-header">
+            Khuyến mãi của Shop
+        </div>
+
+
+        <div>
+            <table id="dynamic-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">
+                            <label class="pos-rel">
+                                <input type="checkbox" class="ace" />
+                                <span class="lbl"></span>
+                            </label>
+                        </th>
+                        <th>Mã khuyến mãi</th>
+                        <th>Ngày bắt đầu</th>
+
+                        <th class="hidden-480">Ngày kết thúc</th>
+
+                        <th>
+                            <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+                            Mô tả
+                        </th>
+                        <th>Phần trăm giảm giá</th>
+
+                        <th>Chỉnh sửa</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @using (var con = new Model1())
+                    {
+                        var list = (from s in con.khuyenmais
+                                    select s).ToList();
+
+
+
+
+                        foreach (var item in list)
+                        {
+                            @*<a href="~/Admin/DonHang/CapNhat?id=@item.MaDon" class="pull-right">Duyệt đơn hàng</a>*@
+
+
+                            <tr>
+                                <td class="center">
+                                    <label class="pos-rel">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl"></span>
+                                    </label>
+                                </td>
+
+                                <td>
+                                    @item.MaKM
+                                </td>
+                                <td>@item.Ngaybatdau</td>
+
+                                <td class="hidden-480">@item.Ngayketthuc</td>
+                                <td>@item.MoTa</td>
+
+                                <td class="hidden-480">
+                                    <span class="admin-status">@item.phantramgiam %</span>
+                                </td>
+
+                                <td>
+                                    <div class="hidden-sm hidden-xs action-buttons">
+
+                                        <a class="green" href="~/Admin/KhuyenMai/ViewChinhSua?id=@item.MaKM">
+                                            <span class="label label-success label-white middle">Chỉnh sửa</span>
+                                        </a>
+
+                                        <a class="red" href="~/Admin/KhuyenMai/XoaKM?id=@item.MaKM">
+                                            <span class="label label-danger label-white middle">  Xóa  </span>
+                                        </a>
+                                       
+                                    </div>
+
+
+                                </td>
+
+                            </tr>
+
+                            <!-- Modal -->
+
+                        }
+
+                    }
+
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+    </div>
+</div>
